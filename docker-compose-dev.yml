@@ -1,0 +1,17 @@
+services:
+    db:
+        image: postgres:13.3
+        container_name: yatb_db
+        ports:
+        - 5432:5432
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_HOST_AUTH_METHOD: trust
+        volumes:
+        - database_data:/var/lib/postgresql/data
+        - ./init_db.sh:/docker-entrypoint-initdb.d/yatb_init_db.sh
+
+volumes:
+    database_data:
+        driver: local
